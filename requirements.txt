@@ -3,7 +3,7 @@ numpy==1.24.4
 matplotlib==3.8.0
 scikit-learn
 joblib==1.3.2
-modin==0.25.0
+modin
 flask==1.1.2
 flask_cors==4.0.0
 gunicorn==19.9.0
