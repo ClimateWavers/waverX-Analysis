@@ -1,9 +1,9 @@
 # Import necessary libraries
 import os
-import modin.pandas as pd
-import modin.config as cfg
+import pandas as pd
+#import modin.config as cfg
 import numpy as np
-#cfg.Engine.put('Ray') 
+#cfg.Engine.put('Ray')
 
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
@@ -15,7 +15,7 @@ import joblib
 
 
 
-    
+
 patch_sklearn()
 
 # Load disaster climate data
@@ -64,10 +64,10 @@ for i in range(N_RUNS):
     # inference
     y_train_pred = model.predict(X_train)
     y_pred = model.predict(X_test)
-    
+
     training_mse.append(mean_squared_error(y_train, y_train_pred))
-    training_cod.append(r2_score(y_train, y_train_pred))    
-    
+    training_cod.append(r2_score(y_train, y_train_pred))
+
     mse_values.append(mean_squared_error(y_test, y_pred))
     cod_values.append(r2_score(y_test, y_pred))
 

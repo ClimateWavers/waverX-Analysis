@@ -5,7 +5,6 @@ from os import environ
 from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS
 import  prediction
-import json
 
 
 app = Flask(__name__)
@@ -46,4 +45,4 @@ if __name__ == "__main__":
     if not port:
         port = '5000'
     app.run(host=host, port=port, threaded=True)
-    
+
