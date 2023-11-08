@@ -118,7 +118,7 @@ def predict(location, start_date, end_date, disaster_type, api_key):
     print(f"waverX-Analysis model prediction for {disaster_type}")
     print(f"Minimum predicted magnitude: {min_pred} {climate_data_df['Magnitude Scale'][0]}")
     print(f"Maximum predicted magnitude: {max_pred} {climate_data_df['Magnitude Scale'][0]}")
-    result = {"minimum_predicted_magnitude": min_pred {climate_data_df['Magnitude Scale'][0]}, "maximum_predicted_magnitude": {max_pred} {climate_data_df['Magnitude Scale'][0]}}
+    result = {"minimum_predicted_magnitude": f"{min_pred} {climate_data_df['Magnitude Scale'][0]}", "maximum_predicted_magnitude": f"{max_pred} {climate_data_df['Magnitude Scale'][0]}"}
     return result
 
 
