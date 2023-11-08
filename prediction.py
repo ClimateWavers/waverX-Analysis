@@ -23,10 +23,10 @@ def fetch_climate_data(location, start_date, end_date, disaster_type, api_key):
     Fetching climate data at specified time to run inference
     """
     API_URL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'
-    
+
     start_date = "{}T00:00:00Z".format(start_date)
     end_date = "{}T23:59:59Z".format(end_date)
-    
+
     if not api_key:
         api_key = os.getenv("API_KEY")
 
@@ -56,16 +56,16 @@ def fetch_climate_data(location, start_date, end_date, disaster_type, api_key):
     humidity_min = filtered_df["humidity"] - 2
     humidity_max = filtered_df["humidity"] + 2
     humidity_mean = (humidity_max + humidity_min) / 2
-    
+
     # Set data columns to dataset columns
     dataset_columns = {"tempmin": "Minimum Temperature", "tempmax": "Maximum Temperature", "dew": "Dew Point", "temp": "Temperature", "windspeedmin": "Wind Speed Min",
                "windspeedmax": "Wind Speed Max", "windspeedmean": "Wind Speed Mean", "winddir": "Wind Direction", "conditions": "Weather Type",
                "precip": "Precipitation", "cloudcover": "Cloud Cover", "sealevelpressure": "Sea Level Pressure", "precipcover": "Precipitation Cover"}
-    
+
     filtered_df.rename(columns=dataset_columns, inplace=True)
-    filtered_df["Relative Humidity Min"] = humidity_min
-    filtered_df["Relative Humidity Max"] = humidity_max
-    filtered_df["Relative Humidity Mean"] = humidity_mean
+    filtered_df.loc[:, "Relative Humidity Min"] = humidity_min
+    filtered_df.loc[:, "Relative Humidity Max"] = humidity_max
+    filtered_df.loc[:, "Relative Humidity Mean"] = humidity_mean
     filtered_df.drop(columns=["humidity"], inplace=True)
     return filtered_df
 
@@ -74,7 +74,7 @@ def predict(location, start_date, end_date, disaster_type, api_key):
     if type(climate_data_df) == str:
         print("Prediction failed")
         return climate_data_df
-    
+
     if disaster_type == "Earthquake":
         climate_data_df["Magnitude Scale"] = "Richter"
     elif disaster_type == "Storm":
@@ -86,13 +86,13 @@ def predict(location, start_date, end_date, disaster_type, api_key):
     climate_data_df['Encoded Magnitude Scale'] = label_encoder.fit_transform(climate_data_df['Magnitude Scale'])
     climate_data_df['Encoded Disaster Type'] = label_encoder.fit_transform(climate_data_df['Disaster Type'])
     climate_data_df['Encoded Weather Type'] = label_encoder.fit_transform(climate_data_df['Weather Type'])
-    
+
     # Drop NaN values
     climate_data_df.dropna(inplace=True)
-    
+
     X = climate_data_df.drop(columns=["Disaster Type", "Weather Type",  "Magnitude Scale"], axis=1)
 
-    
+
     predictions = model.predict(X)
     converted_pred = []
     if disaster_type == "Flood":
