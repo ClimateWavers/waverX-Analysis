@@ -1,88 +1,80 @@
-# Climate Wavers - Django Server
+# WaverX-Analysis Microservice for Climate Wavers
 
+## Overview
 
-The Django Server component of the Climate Change and Disaster Response Platform is responsible for handling core functionalities, user management, and data processing tasks. Built on the Django web framework, this server provides a robust and secure backend for the application.
-
-## Table of Contents
-
-- [Climate Wavers - Django Server](#climate-wavers---django-server)
-  - [Table of Contents](#table-of-contents)
-  - [Project Overview](#project-overview)
-  - [Features](#features)
-  - [Installation and Setup](#installation-and-setup)
-  - [API Endpoints](#api-endpoints)
-  - [Environment Variables](#environment-variables)
-  - [License](#license)
-
-
-## Project Overview
-
-The Climate Change and Disaster Response Platform aims to monitor climate changes, predict natural disasters, and facilitate efficient disaster response. Leveraging Django, the server component ensures seamless user experience, data management, and integration with various data sources.
+The `WaverX-Analysis` microservice is a crucial component of the Climate Wavers disaster response application. It is dedicated to analyzing disaster magnitude using climate data from past disasters. The model, known as WaverX-Analysis, pulls data from a climate data services provider to run inferences on specified dates. Built on the OpenShift Data Science platform and utilizing the Intel oneAPI toolkit, the microservice is served with Flask. The model focuses on analyzing the magnitude of Storms, Floods, and Earthquakes due to the availability of sufficient data in these categories. The model is constructed using scikit-learn with a random forest classifier and further optimized with the Intel scikit-learn extension.
 
 ## Features
 
-- **User Authentication:** Secure user registration, login, and profile management.
-- **Data Management:** Store and manage user data, community information, and datasets.
-- **Real-time Data Processing:** Process incoming data streams for analysis and visualization.
-- **Collaborative Communities:** Enable users to form communities, share observations, and collaborate.
-- **API Endpoints:** Provides RESTful APIs for frontend interaction and external integrations.
+- **Magnitude Analysis:** Analyzes disaster magnitude using climate data from past disasters.
+- **Supported Disasters:** Specifically analyzes Storms, Floods, and Earthquakes due to data availability.
+- **Data Pulling:** Pulls data from a climate data services provider for real-time analysis.
+- **Intel Optimization:** The model is optimized using the Intel oneAPI toolkit and scikit-learn extension for enhanced performance.
+- **Flask API:** Served through a Flask API for seamless integration with other microservices.
 
-## Installation and Setup
+## Technologies Used
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/IsmaelKiprop/ClimateWavers.git
-   cd ClimateWavers
-   ```
+- Scikit-learn
+- Random Forest Classifier
+- Intel oneAPI Toolkit
+- Intel scikit-learn Extension
+- Flask
+- OpenShift Data Science
 
-2. **Install Dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Setup
 
-3. **Database Setup:**
-   - Configure the database settings in `settings.py`.
-   - Run migrations:
-     ```bash
-     python manage.py migrate
-     ```
+### Prerequisites
 
-4. **Static and Media Files:**
-   - Collect static files:
-     ```bash
-     python manage.py collectstatic
-     ```
-   - Configure media file settings in `settings.py`.
+- Python installed
+- Scikit-learn installed
+- Intel oneAPI toolkit installed
+- Flask installed
 
-5. **Run the Django Development Server:**
-   ```bash
-   python manage.py runserver
-   ```
+### Installation
 
-   The Django server will be available at `http://localhost:8000`.
+1. Clone the repository:
 
-## API Endpoints
+```bash
+git clone https://github.com/yourusername/your-repo.git
+cd your-repo
+```
 
-- **User Management:**
-  - `/api/users/register/`: POST endpoint for user registration.
-  - `/api/users/login/`: POST endpoint for user login.
-  - `/api/users/profile/`: GET endpoint to retrieve user profile information.
+2. Install dependencies:
 
-- **Community Management:**
-  - `/api/communities/`: GET and POST endpoint for community management.
-  - `/api/communities/<community_id>/`: GET, PUT, and DELETE endpoint for individual communities.
+```bash
+pip install -r requirements.txt
+```
 
-- **Data Processing:**
-  - Define additional endpoints for real-time data processing based on project requirements.
+3. Configure environment variables:
 
-## Environment Variables
+   - Set up necessary configurations for the data provider and Flask API.
 
-- **SECRET_KEY:** Django secret key for security (store in a secure environment).
-- **DEBUG:** Set to `True` for development, `False` for production.
-- **DATABASE_URL:** Database connection URL for MYSQL databases.
-- **ALLOWED_HOSTS:** List of allowed hostnames for the Django server.
+4. Start the microservice:
 
+```bash
+python app.py
+```
+
+## Usage
+
+Describe how users can interact with the microservice, including API endpoints, request and response formats, and any other relevant details.
+
+## Model Training
+
+Include information on how the WaverX-Analysis model was trained, highlighting the scikit-learn random forest classifier and Intel scikit-learn extension.
+
+## Contributing
+
+If you'd like to contribute to the microservice, please follow the [Contribution Guidelines](CONTRIBUTING.md).
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This microservice is licensed under the [MIT License](LICENSE).
+
+## Acknowledgments
+
+Mention any libraries, platforms, or individuals you want to acknowledge in the development of this microservice.
+
+---
+
+Feel free to customize and expand on these sections based on your specific details and requirements.
